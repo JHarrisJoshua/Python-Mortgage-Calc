@@ -1,0 +1,77 @@
+{% extends "layout.j2" %}
+
+{% block main %}
+<h2>Welcome to the Home Sweet Home Loan Calculator!</h2>
+
+  <div class="container px-4 py-4" id="hanging-icons">
+    <h5 class="pb-2 border-bottom"></h5>
+    <div class="row g-4 py-5 row-cols-1 row-cols-lg-2">
+      <div class="col d-flex align-items-start">
+        <div class="icon-square bg-light text-dark d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3">
+          <svg class="bi" width="0em" height="0em"><img src="/static/image/calc.png"></svg>
+        </div>
+        <div>
+          <h2>Payment Calculator</h2>
+          <p>Purchasing a home? Calculate your monthly payment simply and easily. No registration, quote, or email address
+        required.</p>
+          <a href="/calculator" class="btn btn-primary">Go to the Calculator!</a>
+        </div>
+      </div>
+      <div class="col d-flex align-items-start">
+        <div class="icon-square bg-light text-dark d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3">
+          <svg class="bi" width="0em" height="0em"><img src="/static/image/faq.png"></svg>
+        </div>
+        <div>
+          <h2>FAQs</h2>
+          <p>Need some help? Visit the FAQ page to see frequently asked questions, instructions, and a glossary.</p>
+          <a href="/faq" class="btn btn-primary">Go to the FAQs!</a>
+        </div>
+      </div>
+    </div>
+    <h2 class="pb-2 border-bottom"></h2>
+  </div>
+
+<!-- Template for hanging icons (in case more pages are needed)
+  <div class="container px-4 py-5" id="hanging-icons">
+    <h2 class="pb-2 border-bottom"></h2>
+    <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
+      <div class="col d-flex align-items-start">
+        <div class="icon-square bg-light text-dark d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3">
+          <svg class="bi" width="1em" height="1em"><use xlink:href="#toggles2"/></svg>
+        </div>
+        <div>
+          <h2>Featured title</h2>
+          <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
+          <a href="#" class="btn btn-primary">
+            Primary button
+          </a>
+        </div>
+      </div>
+      <div class="col d-flex align-items-start">
+        <div class="icon-square bg-light text-dark d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3">
+          <svg class="bi" width="1em" height="1em"><use xlink:href="#cpu-fill"/></svg>
+        </div>
+        <div>
+          <h2>Featured title</h2>
+          <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
+          <a href="#" class="btn btn-primary">
+            Primary button
+          </a>
+        </div>
+      </div>
+      <div class="col d-flex align-items-start">
+        <div class="icon-square bg-light text-dark d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3">
+          <svg class="bi" width="1em" height="1em"><use xlink:href="#tools"/></svg>
+        </div>
+        <div>
+          <h2>Featured title</h2>
+          <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
+          <a href="#" class="btn btn-primary">
+            Primary button
+          </a>
+        </div>
+      </div>
+    </div>
+  </div> -->
+
+{% endblock %}

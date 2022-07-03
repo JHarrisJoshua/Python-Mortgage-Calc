@@ -1,0 +1,51 @@
+{% extends "layout.j2" %}
+
+{% block main %}
+<h2>FAQs</h2>
+
+<div class="container px-2 py-3">
+      <h3 class="fw-semibold border-bottom">Frequently Asked Questions</h3>
+      <h5 class="fw-semibold px-2 py-2">What type of Mortgages does the calculator support?</h5>
+      <p class="pe-lg-5 px-3 ">
+        Payments can be calculated for a variety of fixed-rate mortgages between 10 and 30 years.
+        Rates are available for purchasing and refinancing.
+      </p>
+      <h5 class="fw-semibold px-2 py-2">What factors affect the rate I get for my mortgage?</h5>
+      <p class="pe-lg-5 px-3 ">
+        Several factors can affect the interest rate, and the rates on this site represent an average rate based on
+        certain conditions. These include credit score, down payment, loan amount, and type of home. Rates change
+        throughout the day, and this site can't guarantee what rate any one borrower will receive.
+      </p>
+</div>
+
+<div class="container px-2 py-2">
+      <h3 class="fw-semibold border-bottom">Instructions</h3>
+      <h5 class="fw-semibold px-2 py-2">Calculating a Mortgage Payment</h5>
+      <p class="pe-lg-5 px-3 ">
+        On the Payment Calculator page, input information about your loan. Select whether you are purchasing a home, or
+        refinancing an existing loan. Select the loan type (e.g. 30-year, 15-year, etc.). Select the amount of the loan,
+        and your desired down payment (e.g. 0%, 20%, etc.). Once you have selected the desired inputs, press the calculate button
+        to see your monthly payment amount and other information about the loan.
+      </p>
+</div>
+
+<div class="container px-2 py-2">
+      <h3 class="fw-semibold border-bottom">Glossary</h3>
+      <h5 class="fw-semibold px-2 py-2">Interest Rate</h5>
+      <p class="pe-lg-5 px-3 ">
+        The rate used to calculate a loan's monthly payment.
+      </p>
+      <h5 class="fw-semibold px-2 py-2">Annual Percentage Rate (APR)</h5>
+      <p class="pe-lg-5 px-3 ">
+        The rate used to compare the total cost of a loan between different lenders. The APR includes costs that
+        are not reflected in the monthly payment, such as lender and borrowing fees.
+      </p>
+      <h5 class="fw-semibold px-2 py-2">Loan to Value (LTV)</h5>
+      <p class="pe-lg-5 px-3 ">
+        Different types of mortgages have certain requirements about how much you can borrow based on the value of a home.
+        For instance, if a home is appraised for $100,000, a conventional mortgage that requires a 20% down payment means
+        the lender will loan up to $80,000, or 80% of the home's value (an 80% LTV).
+      </p>
+</div>
+
+{% endblock %}
