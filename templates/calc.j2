@@ -3,116 +3,111 @@
 {% block main %}
 <h2>Payment Calculator</h2>
 
-    <div class="row g-5 px-4 py-4">
-      <div class="col-md-5 col-lg-4 order-md-last">
-        <h4 class="d-flex justify-content-between align-items-center mb-3">
-          <span class="text">Monthly Payment Summary</span>
-        </h4>
-        <ul class="list-group mb-3">
-          <li class="list-group-item d-flex justify-content-between lh-sm">
-            <div>
-              <h6 class="my-0">Total Monthly Payment</h6>
-              <small class="text-muted">Interest Plus Principal</small>
-            </div>
-            <span class="text-muted">$12</span>
-          </li>
-        <li class="list-group-item d-flex justify-content-between lh-sm">
-            <div>
-              <h6 class="my-0">Interest Rate</h6>
-              <small class="text-muted">Used in Calculation</small>
-            </div>
-            <span class="text-muted">$8</span>
-          </li>
-          <li class="list-group-item d-flex justify-content-between lh-sm">
-            <div>
-              <h6 class="my-0">Total Principal Paid</h6>
-              <small class="text-muted">Over Life of Loan</small>
-            </div>
-            <span class="text-muted">$8</span>
-          </li>
-          <li class="list-group-item d-flex justify-content-between lh-sm">
-            <div>
-              <h6 class="my-0">Total Interest Paid</h6>
-              <small class="text-muted">Over Life of Loan</small>
-            </div>
-            <span class="text-muted">$5</span>
-          </li>
-          <li class="list-group-item d-flex justify-content-between lh-sm">
-            <div>
-              <h6 class="my-0">Total of all Payments</h6>
-              <small class="text-muted">Over Life of Loan</small>
-            </div>
-            <span class="text-muted">$5</span>
-          </li>
-        </ul>
-      </div>
+<div class="row g-5 px-4 py-4">
+  <div class="col-md-5 col-lg-4 order-md-last">
+    <h4 class="d-flex justify-content-between align-items-center mb-3">
+      <span class="text">Monthly Payment Summary</span>
+    </h4>
+    <ul class="list-group mb-3">
+      <li class="list-group-item d-flex justify-content-between lh-sm">
+        <div>
+          <h6 class="my-0">Total Monthly Payment</h6>
+          <small class="text-muted">Interest Plus Principal</small>
+        </div>
+        <span class="text-muted">{{"$ {:,.2f}".format(pmt_info['monthly_pmt'])}}</span>
+      </li>
+      <li class="list-group-item d-flex justify-content-between lh-sm">
+        <div>
+          <h6 class="my-0">Interest Rate</h6>
+          <small class="text-muted">Used in Calculation</small>
+        </div>
+        <span class="text-muted">{{"{:,.2f}%".format(pmt_info['rate'])}}</span>
+      </li>
+      <li class="list-group-item d-flex justify-content-between lh-sm">
+        <div>
+          <h6 class="my-0">Total Principal Paid</h6>
+          <small class="text-muted">Over Life of Loan</small>
+        </div>
+        <span class="text-muted">{{"$ {:,.0f}".format(pmt_info['tot_prin'])}}</span>
+      </li>
+      <li class="list-group-item d-flex justify-content-between lh-sm">
+        <div>
+          <h6 class="my-0">Total Interest Paid</h6>
+          <small class="text-muted">Over Life of Loan</small>
+        </div>
+        <span class="text-muted">{{"$ {:,.0f}".format(pmt_info['tot_int'])}}</span>
+      </li>
+      <li class="list-group-item d-flex justify-content-between lh-sm">
+        <div>
+          <h6 class="my-0">Total of all Payments</h6>
+          <small class="text-muted">Over Life of Loan</small>
+        </div>
+        <span class="text-muted">{{"$ {:,.0f}".format(pmt_info['sum_pmts'])}}</span>
+      </li>
+    </ul>
+  </div>
 
-      <div class="col-md-7 col-lg-8">
-        <h4 class="mb-3">Loan Information</h4>
-        <form class="needs-validation" novalidate>
+  <div class="col-md-7 col-lg-8">
+    <h4 class="mb-3">Loan Information</h4>
+    <form id="calcPayment" action="/calculator" method="post">
+      <fieldset class="fields">
 
-            <div class="col-12">
-              <label for="firstName" class="form-label">Loan Type</label>
-              <select class="form-select" id="country" required>
-              <option value="purchase" selected>Purchase</option>
-                <option value="refinance">Refinance</option>
-              </select>
-              <div class="invalid-feedback">
-                Valid first name is required.
-              </div>
+        <div class="col-12">
+          <label for="loanType" class="form-label">Loan Type</label>
+          <select class="form-select" name="loan_type" id="loan_type" required>
+            {% if pmt_info['loan_type'] == 'purchase' %}
+            <option value="purchase" selected>Purchase</option>
+            <option value="refinance">Refinance</option>
+            {% else %}
+            <option value="purchase">Purchase</option>
+            <option value="refinance" selected>Refinance</option>
+            {% endif %}
+          </select>
 
-            <div class="col-12">
-              <label for="country" class="form-label">Loan Term</label>
-              <select class="form-select" id="country" required>
-              <option value="10">10-Year Fixed</option>
-            <option value="15">15-Year Fixed</option>
-            <option value="20">20-Year Fixed</option>
-                <option value="30" selected>30-Year Fixed</option>
-              </select>
-              <div class="invalid-feedback">
-                Please select a valid country.
-              </div>
-            </div>
+          <div class="col-12">
+            <label for="loanTerm" class="form-label">Loan Term</label>
+            <select class="form-select" name="loan_term" id="loan_term" required>
+              {% for term in ['10', '15', '20', '30'] %}
+              {% if pmt_info['loan_term'] == term %}
+              <option value={{pmt_info['loan_term']}} selected>{{pmt_info['loan_term']}}-Year Fixed</option>
+              {% else %}
+              <option value={{term}}>{{term}}-Year Fixed</option>
+              {% endif %}
+              {% endfor %}
+            </select>
+          </div>
 
-            <div class="col-12">
-              <label for="country" class="form-label">Purchase Price</label>
-              <select class="form-select" id="country" required>
-                {% for amt in range(50000,1000001, 5000) %}
-                   {% if amt == 250000 %}
-                        <option value=amt selected>{{"$ {:,.0f}".format(amt)}}</option>
-                    {% else %}
-                        <option value=amt>{{"$ {:,.0f}".format(amt)}}</option>
-                     {% endif %}
-                {% endfor %}
-              </select>
-              <div class="invalid-feedback">
-                Please select a valid country.
-              </div>
-            </div>
+          <div class="col-12">
+            <label for="purchasePrice" class="form-label">Purchase Price</label>
+            <select class="form-select" name="home_price" id="home_price" required>
+              {% for amt in range(50000,1000001, 5000) %}
+              {% if amt == pmt_info['home_price'] %}
+              <option value={{amt}} selected>{{"$ {:,.0f}".format(amt)}}</option>
+              {% else %}
+              <option value={{amt}}>{{"$ {:,.0f}".format(amt)}}</option>
+              {% endif %}
+              {% endfor %}
+            </select>
+          </div>
 
-            <div class="col-12">
-              <label for="country" class="form-label">Down Payment</label>
-              <select class="form-select" id="country" required>
-                {% for pct in range(0, 51, 5) %}
-                   {% if pct == 20 %}
-                        <option value=pct selected>{{"{:,.0f}%".format(pct)}}</option>
-                    {% else %}
-                        <option value=pct>{{"{:,.0f}%".format(pct)}}</option>
-                     {% endif %}
-                {% endfor %}
-              </select>
-              <div class="invalid-feedback">
-                Please select a valid country.
-              </div>
-            </div>
-
-
-
+          <div class="col-12">
+            <label for="downPMT" class="form-label">Down Payment</label>
+            <select class="form-select" name="down_pmt" id="down_pmt" required>
+              {% for pct in range(0, 51, 5) %}
+              {% if pct == pmt_info['down_pmt'] %}
+              <option value={{pct}} selected>{{"{:,.0f}%".format(pct)}}</option>
+              {% else %}
+              <option value={{pct}}>{{"{:,.0f}%".format(pct)}}</option>
+              {% endif %}
+              {% endfor %}
+            </select>
+          </div>
 
           <hr class="my-4">
-          <button class="w-100 btn btn-primary btn-lg" type="submit">Calculate Payment</button>
-        </form>
-      </div>
-    </div>
+      </fieldset>
+      <input type="submit" class="w-100 btn btn-primary btn-lg" name="calc_info" value="Calculate Payment">
+    </form>
+  </div>
+</div>
 
 {% endblock %}
