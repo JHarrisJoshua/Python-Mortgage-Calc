@@ -11,10 +11,13 @@ def get_rates():
     # Datetime
     date_today = str(date.today())
 
+    # Provide relative path to JSON file
     path = os.path.join(os.path.dirname(__file__))
     with open(path + '/' + 'rates.json') as infile:
         rate_data = json.load(infile)
 
+    # Check that rates are from today
+    # TODO: update rates programmatically via microservice
     if rate_data['date'] == date_today:
         print('No Update Needed')
     else:
