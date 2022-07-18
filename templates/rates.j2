@@ -1,0 +1,39 @@
+{% extends "layout.j2" %}
+
+{% block main %}
+<h2>Current Rates</h2>
+<p>Rates in the table below are as of {{data_date}}. Visit the FAQ page for more information.</p>
+
+<table class="table table-striped table-hover caption-top">
+  <caption class="h5 fw-bold text-dark">Purchase</caption>
+  <thead>
+  <tr>
+    <th>Term</th> <th>Rate</th> <th>APR</th>
+  </tr> </thead>
+  <tbody>
+    {% for term in rates['purchase']['rate'] %}
+        <tr>
+        <td>{{term}}-Year Fixed</td>
+        <td>{{"{:,.2f}%".format(rates['purchase']['rate'][term]*100)}}</td>
+        <td>{{"{:,.2f}%".format(rates['purchase']['apr'][term]*100)}}</td>
+        </tr>
+    {% endfor %}</tbody>
+</table>
+
+<table class="table table-striped table-hover caption-top">
+  <caption class="h5 fw-bold text-dark">Refinance</caption>
+  <thead>
+  <tr>
+    <th>Term</th> <th>Rate</th> <th>APR</th>
+  </tr> </thead>
+  <tbody>
+    {% for term in rates['refinance']['rate'] %}
+        <tr>
+        <td>{{term}}-Year Fixed</td>
+        <td>{{"{:,.2f}%".format(rates['refinance']['rate'][term]*100)}}</td>
+        <td>{{"{:,.2f}%".format(rates['refinance']['apr'][term]*100)}}</td>
+        </tr>
+    {% endfor %}</tbody>
+</table>
+
+{% endblock %}

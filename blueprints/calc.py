@@ -1,6 +1,5 @@
 from flask import Flask, Blueprint, render_template, json, redirect, request
 import json
-
 import data.data as rate_data
 
 # Configuration
@@ -10,6 +9,7 @@ calc_view = Blueprint('calc_view', __name__)
 # View Calculation page
 @calc_view.route('/', methods=["POST", "GET"])
 def calc():
+    print("Test", request)
     # Rate info
     rates = rate_data.get_rates()
 
@@ -17,6 +17,20 @@ def calc():
     if request.method in ["POST", "GET"]:
         pmt_info = pmt_calc(request, rates)
         return render_template("calc.j2", pmt_info=pmt_info)
+
+
+# View Amortization Schedule
+@calc_view.route('/amortization-schedule', methods=["POST", "GET"])
+def amortization():
+    print("Test", request)
+    # Rate info
+    rates = rate_data.get_rates()
+
+    # Render Amortization Schedule
+    if request.method in ["POST", "GET"]:
+        pmt_info = pmt_calc(request, rates)
+        print(request, pmt_info)
+        return render_template("amort.j2", pmt_info=pmt_info)
 
 
 def pmt_calc(re, data):
