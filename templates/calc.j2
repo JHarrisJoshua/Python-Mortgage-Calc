@@ -19,7 +19,7 @@
             <option value="purchase">Purchase</option>
             <option value="refinance" selected>Refinance</option>
             {% endif %}
-          </select>
+          </select></div>
 
           <div class="col-12">
             <label for="loanTerm" class="form-label">Loan Term</label>
@@ -59,6 +59,8 @@
               {% endfor %}
             </select>
           </div>
+          <input hidden type="number" class="form-control" min="0" step="1" pattern="/d+"
+              name="addl_pmt" id="addl_pmt" placeholder=0 value=0 required>
 
           <hr class="my-4">
       </fieldset>
