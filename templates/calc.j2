@@ -19,53 +19,55 @@
             <option value="purchase">Purchase</option>
             <option value="refinance" selected>Refinance</option>
             {% endif %}
-          </select></div>
+          </select>
+        </div>
 
-          <div class="col-12">
-            <label for="loanTerm" class="form-label">Loan Term</label>
-            <select class="form-select" name="loan_term" id="loan_term" required>
-              {% for term in ['10', '15', '20', '30'] %}
-              {% if pmt_info['loan_term'] == term %}
-              <option value={{pmt_info['loan_term']}} selected>{{pmt_info['loan_term']}}-Year Fixed</option>
-              {% else %}
-              <option value={{term}}>{{term}}-Year Fixed</option>
-              {% endif %}
-              {% endfor %}
-            </select>
-          </div>
+        <div class="col-12">
+          <label for="loanTerm" class="form-label">Loan Term</label>
+          <select class="form-select" name="loan_term" id="loan_term" required>
+            {% for term in ['10', '15', '20', '30'] %}
+            {% if pmt_info['loan_term'] == term %}
+            <option value={{pmt_info['loan_term']}} selected>{{pmt_info['loan_term']}}-Year Fixed</option>
+            {% else %}
+            <option value={{term}}>{{term}}-Year Fixed</option>
+            {% endif %}
+            {% endfor %}
+          </select>
+        </div>
 
-          <div class="col-12">
-            <label for="purchasePrice" class="form-label">Purchase Price</label>
-            <select class="form-select" name="home_price" id="home_price" required>
-              {% for amt in range(50000,1000001, 5000) %}
-              {% if amt == pmt_info['home_price'] %}
-              <option value={{amt}} selected>{{"$ {:,.0f}".format(amt)}}</option>
-              {% else %}
-              <option value={{amt}}>{{"$ {:,.0f}".format(amt)}}</option>
-              {% endif %}
-              {% endfor %}
-            </select>
-          </div>
+        <div class="col-12">
+          <label for="purchasePrice" class="form-label">Purchase Price</label>
+          <select class="form-select" name="home_price" id="home_price" required>
+            {% for amt in range(50000,1000001, 5000) %}
+            {% if amt == pmt_info['home_price'] %}
+            <option value={{amt}} selected>{{"$ {:,.0f}".format(amt)}}</option>
+            {% else %}
+            <option value={{amt}}>{{"$ {:,.0f}".format(amt)}}</option>
+            {% endif %}
+            {% endfor %}
+          </select>
+        </div>
 
-          <div class="col-12">
-            <label for="downPMT" class="form-label">Down Payment</label>
-            <select class="form-select" name="down_pmt" id="down_pmt" required>
-              {% for pct in range(0, 51, 5) %}
-              {% if pct == pmt_info['down_pmt'] %}
-              <option value={{pct}} selected>{{"{:,.0f}%".format(pct)}}</option>
-              {% else %}
-              <option value={{pct}}>{{"{:,.0f}%".format(pct)}}</option>
-              {% endif %}
-              {% endfor %}
-            </select>
-          </div>
-          <input hidden type="number" class="form-control" min="0" step="1" pattern="/d+"
-              name="addl_pmt" id="addl_pmt" placeholder=0 value=0 required>
+        <div class="col-12">
+          <label for="downPMT" class="form-label">Down Payment</label>
+          <select class="form-select" name="down_pmt" id="down_pmt" required>
+            {% for pct in range(0, 51, 5) %}
+            {% if pct == pmt_info['down_pmt'] %}
+            <option value={{pct}} selected>{{"{:,.0f}%".format(pct)}}</option>
+            {% else %}
+            <option value={{pct}}>{{"{:,.0f}%".format(pct)}}</option>
+            {% endif %}
+            {% endfor %}
+          </select>
+        </div>
+        <input hidden type="number" class="form-control" min="0" step="1" pattern="/d+" name="addl_pmt" id="addl_pmt"
+          placeholder=0 value=0 required>
 
-          <hr class="my-4">
+        <hr class="my-4">
       </fieldset>
       <input type="submit" class=" btn btn-lg btn-primary" name="calc_info" value="Calculate Payment">
-      <input type="submit" formaction="/calculator/amortization-schedule" class=" btn btn-primary btn-lg" name="calc_info" value="View Amortization Schedule">
+      <input type="submit" formaction="/calculator/amortization-schedule" class=" btn btn-primary btn-lg"
+        name="calc_info" value="View Amortization Schedule">
     </form>
   </div>
 
