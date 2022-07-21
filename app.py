@@ -5,7 +5,6 @@
 # Source URL: https://icon-icons.com/
 # Source URL: https://www.bankrate.com/
 
-# Imports
 from flask import Flask, Blueprint, render_template, json, redirect, request
 import os
 
@@ -23,14 +22,14 @@ app.register_blueprint(rates_view, url_prefix='/rates')
 app.register_blueprint(faq_view, url_prefix='/faq')
 
 
-# Route to home page
 @app.route('/')
 def root():
+    """Route to home page"""
     return render_template("index.j2")
 
 
 # Listener for local testing
 if __name__ == "__main__":
-     port = int(os.environ.get('PORT', 9999))
-     app.run(port=port, debug=True)
+    port = int(os.environ.get('PORT', 9999))
+    app.run(port=port, debug=True)
     

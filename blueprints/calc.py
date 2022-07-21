@@ -2,7 +2,7 @@ from flask import Flask, Blueprint, render_template, json, redirect, request
 import json
 import data.data as rate_data
 
-# Configuration
+# Configure Flask Blueprint
 calc_view = Blueprint('calc_view', __name__)
 
 
@@ -31,11 +31,11 @@ def amortization():
     if request.method in ["POST", "GET"]:
         pmt_info = pmt_calc(request, rates)
         print(request, pmt_info)
-        return render_template("amort.j2", pmt_info=pmt_info)
+        return render_template("amortization.j2", pmt_info=pmt_info)
 
 
 def pmt_calc(re, data):
-    """Calculate Mortgage Payment"""
+    """Calculate Mortgage Payment(pmt)"""
     if re.method == "GET":
         loan_type, loan_term = "purchase", '30'
         home_price, down_pmt, addl_pmt = 250000, .2, 0
