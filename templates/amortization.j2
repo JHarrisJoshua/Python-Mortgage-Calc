@@ -65,8 +65,8 @@
           <label class="form-label"> Additional Payment Per Month </label>
           <div class="input-group mb-3">
             <span class="input-group-text">$</span>
-            <input type="number" class="form-control" min="0" step="1" pattern="/d+" name="addl_pmt" id="addl_pmt"
-              value={{pmt_info['addl_pmt']}} required>
+            <input type="number" class="form-control" min="0" max={{pmt_info['total_principal']}} step="1" pattern="/d+" name="extra_pmt" id="extra_pmt"
+              value={{pmt_info['extra_pmt']}} required>
             <span class="input-group-text">.00</span>
           </div>
         </div>
@@ -116,7 +116,7 @@
           <span class="text-muted">{{"$ {:,.2f}".format(0)}}</span>
         </div>
         <div class="col d-flex justify-content-end">
-          <span class="text-muted">{{"$ {:,.2f}".format(pmt_info['addl_pmt'])}}</span>
+          <span class="text-muted">{{"$ {:,.2f}".format(pmt_info['extra_pmt'])}}</span>
         </div>
       </li>
 
@@ -138,10 +138,10 @@
           <small class="text-muted">Over Life of Loan</small>
         </div>
         <div class="col d-flex justify-content-end">
-          <span class="text-muted">{{"$ {:,.0f}".format(pmt_info['tot_prin'])}}</span>
+          <span class="text-muted">{{"$ {:,.0f}".format(pmt_info['total_principal'])}}</span>
         </div>
         <div class="col d-flex justify-content-end">
-          <span class="text-muted">{{"$ {:,.0f}".format(pmt_info['tot_prin'])}}</span>
+          <span class="text-muted">{{"$ {:,.0f}".format(pmt_info['total_principal'])}}</span>
         </div>
       </li>
       <li class="list-group-item d-flex justify-content-between lh-sm">
@@ -150,10 +150,10 @@
           <small class="text-muted">Over Life of Loan</small>
         </div>
         <div class="col d-flex justify-content-end">
-          <span class="text-muted">{{"$ {:,.0f}".format(pmt_info['tot_int'])}}</span>
+          <span class="text-muted">{{"$ {:,.0f}".format(pmt_info['total_interest'])}}</span>
         </div>
         <div class="col d-flex justify-content-end">
-          <span class="text-muted">{{"$ {:,.0f}".format(pmt_info['amort_info']['tot_int'])}}</span>
+          <span class="text-muted">{{"$ {:,.0f}".format(pmt_info['amort_info']['total_interest'])}}</span>
         </div>
       </li>
       <li class="list-group-item d-flex justify-content-between lh-sm">

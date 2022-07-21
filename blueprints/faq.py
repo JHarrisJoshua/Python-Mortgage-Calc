@@ -6,5 +6,5 @@ faq_view = Blueprint('faq_view', __name__)
 
 @faq_view.route('/')
 def faq():
-    """FAQ Page"""
+    """Frequently Asked Questions (FAQ) Page"""
     return render_template("faq.j2")

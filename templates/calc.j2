@@ -60,7 +60,7 @@
             {% endfor %}
           </select>
         </div>
-        <input hidden type="number" class="form-control" min="0" step="1" pattern="/d+" name="addl_pmt" id="addl_pmt"
+        <input hidden type="number" class="form-control" min="0" step="1" pattern="/d+" name="extra_pmt" id="extra_pmt"
           placeholder=0 value=0 required>
 
         <hr class="my-4">
@@ -95,14 +95,14 @@
           <h6 class="my-0">Total Principal Paid</h6>
           <small class="text-muted">Over Life of Loan</small>
         </div>
-        <span class="text-muted">{{"$ {:,.0f}".format(pmt_info['tot_prin'])}}</span>
+        <span class="text-muted">{{"$ {:,.0f}".format(pmt_info['total_principal'])}}</span>
       </li>
       <li class="list-group-item d-flex justify-content-between lh-sm">
         <div>
           <h6 class="my-0">Total Interest Paid</h6>
           <small class="text-muted">Over Life of Loan</small>
         </div>
-        <span class="text-muted">{{"$ {:,.0f}".format(pmt_info['tot_int'])}}</span>
+        <span class="text-muted">{{"$ {:,.0f}".format(pmt_info['total_interest'])}}</span>
       </li>
       <li class="list-group-item d-flex justify-content-between lh-sm">
         <div>
