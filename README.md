@@ -34,5 +34,5 @@ The page allows users to see mortgage interest rates for various types of fixed-
 ### FAQs
 Provides basic information and answers to common questions related to mortgages and mortgage rates.
 
-## Next Up
+## Up Next
 In the next release, a microservice will be implemented that utilizes web-scraping to update mortgage interest rates automatically (sourced from Bankrate.com). Using a microservices architecture, the application will communicate to the microservice via a message broker such as RabbitMQ. Expected release is some time in August.    
