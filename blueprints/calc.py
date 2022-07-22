@@ -5,6 +5,9 @@ import data.data as rate_data
 # Configure Flask Blueprint
 calc_view = Blueprint('calc_view', __name__)
 
+# Default Values for GET method
+PRICE, DOWN = 250000, 20
+
 
 @calc_view.route('/', methods=["POST", "GET"])
 def calc():
@@ -35,9 +38,10 @@ def pmt_calc_route(re, rates):
 
 
 def create_pmt_dict():
-    """Helper method. Generates a dictionary to store payment info"""
+    """ Helper method. Generates a dictionary with default values
+    to store payment info"""
     pmt_info = {"loan_type": "purchase", "loan_term": "30",
-                "home_price": 250000, "down_pmt": 20, "monthly_pmt": 0,
+                "home_price": PRICE, "down_pmt": DOWN, "monthly_pmt": 0,
                 "extra_pmt": 0, "rate": 0, "total_principal": 0.0,
                 "total_interest": 0, "sum_pmts": 0}
 
@@ -61,15 +65,16 @@ def pmt_calc(pmt_info, rates):
     """Populate Payment(pmt) info for Summary"""
     rate = rates[pmt_info['loan_type']]['rate'][pmt_info['loan_term']]
     loan_info = pmt_info_helper(pmt_info, rate, pmt_info['loan_term'])
+    payment, sum_pmts, loan_amt, total_interest = loan_info
 
-    pmt_info['monthly_pmt'], pmt_info['sum_pmts'] = loan_info[0], loan_info[1]
-    pmt_info['total_principal'] = loan_info[2]
-    pmt_info["total_interest"], pmt_info['rate'] = loan_info[3], rate * 100
+    pmt_info['monthly_pmt'], pmt_info['sum_pmts'] = payment, sum_pmts
+    pmt_info['total_principal'] = loan_amt
+    pmt_info["total_interest"], pmt_info['rate'] = total_interest, rate * 100
     pmt_info["amort_info"] = amortization_calc(pmt_info)
     return pmt_info
 
 
-def pmt_info_helper(info, rate, loan_term):
+def pmt_info_helper(info, rate, loan_term) -> tuple:
     """Helper Method. Monthly Payment Calculation. """
     loan_amt = (info['home_price'] * (1 - info['down_pmt']/100))
     payment = round(loan_amt * (rate / 12) /
