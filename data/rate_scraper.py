@@ -12,7 +12,7 @@ from dotenv import load_dotenv, find_dotenv
 load_dotenv(find_dotenv())
 
 # Set the CLOUDAMPQ URL (URL from Heroku config)
-CLOUDAMPQ_URL = os.environ.get("CLOUDAMPQ_URL")
+CLOUDAMQP_URL = os.environ.get("CLOUDAMQP_URL")
 
 
 def main() -> None:
@@ -22,7 +22,7 @@ def main() -> None:
     and responds with the file name containing rate data
     """
     connection = pika.BlockingConnection(
-        pika.ConnectionParameters(host=CLOUDAMPQ_URL))
+        pika.ConnectionParameters(host=CLOUDAMQP_URL))
 
     channel = connection.channel()
 

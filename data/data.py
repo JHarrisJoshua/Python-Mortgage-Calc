@@ -12,13 +12,13 @@ from dotenv import load_dotenv, find_dotenv
 load_dotenv(find_dotenv())
 
 # Set the CLOUDAMPQ URL (URL from Heroku config)
-CLOUDAMPQ_URL = os.environ.get("CLOUDAMPQ_URL")
+CLOUDAMQP_URL = os.environ.get("CLOUDAMQP_URL")
 
 class RateRpcClient(object):
 
     def __init__(self):
         self.connection = pika.BlockingConnection(
-            pika.ConnectionParameters(host=CLOUDAMPQ_URL))
+            pika.ConnectionParameters(host=CLOUDAMQP_URL))
 
         self.channel = self.connection.channel()
 
