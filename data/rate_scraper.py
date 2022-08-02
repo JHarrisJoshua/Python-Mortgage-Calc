@@ -11,7 +11,7 @@ from dotenv import load_dotenv, find_dotenv
 # Load environment variables from the .env file
 load_dotenv(find_dotenv())
 
-# Set the CLOUDAMPQ URL (URL from Heroku config)
+# Set the CLOUDAMQP URL (URL from Heroku config)
 CLOUDAMQP_URL = os.environ.get("CLOUDAMQP_URL")
 
 
@@ -19,7 +19,7 @@ def main() -> None:
     """
     Remote Procedure Call (RPC) using RabbitMQ and Pika Python Client
     Checks for request, scrapes interest rate data,
-    and responds with the file name containing rate data
+    and responds with rate data
     """
     params = pika.URLParameters(CLOUDAMQP_URL)
     connection = pika.BlockingConnection(params)
@@ -52,7 +52,6 @@ def scrape_rates():
     beautiful soup library.
     https://beautiful-soup-4.readthedocs.io/en/latest/
     """
-    # Open URL, read HTML, and scrape tags 
     url = 'https://www.bankrate.com/mortgages/20-year-mortgage-rates'
     html_page = urllib.request.urlopen(url).read()
     soup = BeautifulSoup(html_page, 'html.parser')
@@ -71,16 +70,15 @@ def scrape_rates():
         if percent_count >= 16:
             end = True
 
-        # If statements for handling the different html tags we are looking for
+        # Mortagage Types: purchase and refinance
         if start and not end:
-            # Gets the two categories of products: purchase and refinance
             if str(tag.name) == 'div':
                 if str(tag.get('id')) == "purchase" or str(tag.get('id') == "refinance"):
                     heading = str(tag.get('id'))
                     heading = heading.capitalize()
                     rate_dict[heading] = dict()
 
-            # Gets the product type in terms of length
+            # Loan term
             if str(tag.name) == 'th':
                 rate = str(tag.get_text())
                 rate = rate.strip('\n')
@@ -88,7 +86,7 @@ def scrape_rates():
                     rate_dict[heading][rate] = \
                         dict(zip(attrib_list, attrib_info))
 
-            # Gets the actual percentage rates
+            # Mortgage Rates
             if str(tag.name) == 'td':
                 rate_dict[heading][rate][attrib_list[idx]] = str(tag.get_text())
                 idx = (idx + 1) % 2
