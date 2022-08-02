@@ -17,19 +17,19 @@ from blueprints.faq import faq_view
 app = Flask(__name__)
 
 # Register Flask Blueprints
-app.register_blueprint(calc_view, url_prefix='/calculator')
-app.register_blueprint(rates_view, url_prefix='/rates')
-app.register_blueprint(faq_view, url_prefix='/faq')
+app.register_blueprint(calc_view, url_prefix="/calculator")
+app.register_blueprint(rates_view, url_prefix="/rates")
+app.register_blueprint(faq_view, url_prefix="/faq")
 
 
-@app.route('/')
+@app.route("/")
 def root():
     """Route to home page"""
     return render_template("index.j2")
 
 
 # Listener for local testing
-#if __name__ == "__main__":
-#    port = int(os.environ.get('PORT', 9999))
-#    app.run(port=port, debug=True)
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 9999))
+    app.run(port=port, debug=True)
     
