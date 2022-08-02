@@ -70,6 +70,7 @@ def check_rate_date(rate_data, path):
     if rate_data["date"] == str(date.today()):
         print("No Update Needed")
         return rate_data
+    print("Update Needed")
     return call_microservice(rate_data, path)
 
 

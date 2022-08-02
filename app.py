@@ -7,6 +7,7 @@
 
 from flask import Flask, Blueprint, render_template, json, redirect, request
 import os
+import data.data as rate_data
 
 # Import Flask Blueprints for individual pages
 from blueprints.calc import calc_view
@@ -25,6 +26,7 @@ app.register_blueprint(faq_view, url_prefix="/faq")
 @app.route("/")
 def root():
     """Route to home page"""
+    rate_data.get_rates()
     return render_template("index.j2")
 
 
