@@ -17,8 +17,8 @@ CLOUDAMQP_URL = os.environ.get("CLOUDAMQP_URL")
 class RateRpcClient(object):
 
     def __init__(self):
-        self.connection = pika.BlockingConnection(
-            pika.ConnectionParameters(host=CLOUDAMQP_URL))
+        self.params = pika.URLParameters(CLOUDAMQP_URL)
+        self.connection = pika.BlockingConnection(self.params)
 
         self.channel = self.connection.channel()
 

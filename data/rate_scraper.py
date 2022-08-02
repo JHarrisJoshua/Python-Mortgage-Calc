@@ -21,8 +21,8 @@ def main() -> None:
     Checks for request, scrapes interest rate data,
     and responds with the file name containing rate data
     """
-    connection = pika.BlockingConnection(
-        pika.ConnectionParameters(host=CLOUDAMQP_URL))
+    params = pika.URLParameters(CLOUDAMQP_URL)
+    connection = pika.BlockingConnection(params)
 
     channel = connection.channel()
 
