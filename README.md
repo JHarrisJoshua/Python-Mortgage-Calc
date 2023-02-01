@@ -12,11 +12,12 @@ The program allows users to calculate a mortgage payment for a prospective home 
 
 ## Web App
 ### Heroku Link
-The application is hosted on Heroku. Use the following link to view the project.
+The application was hosted on Heroku. RIP Heroku free tier. If I get time I plan on migrating the project. I plan on spiking a few free-tier providers to see which I like best. 
 
+<!--- 
 https://home-loan-calculator.herokuapp.com/
-
 * Note that Heroku puts the app to sleep after 30 minutes of inactivity. Visiting the site will load the app from sleep, which results in noticeable lag for the first visit. Subsequent visits will not require booting the app. There are ways to mitigate this, and in production, the app would be run on a higher service tier.
+--->
 
 ### Framework
 The app is implemented using Python, Flask, Jinja for templating, and Bootstrap for styling. Data for the app is stored using JSON.
